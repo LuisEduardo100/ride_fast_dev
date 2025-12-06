@@ -20,6 +20,10 @@ if System.get_env("PHX_SERVER") do
   config :ride_fast, RideFastWeb.Endpoint, server: true
 end
 
+if File.exists?(".env") do
+  Dotenvy.source!(".env")
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

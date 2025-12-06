@@ -40,6 +40,7 @@ defmodule RideFast.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:dotenvy, "~> 0.8"},
       {:guardian, "~> 2.3"},
       # {:bcrypt_elixir, "~> 3.0"},
       {:pbkdf2_elixir, "~> 2.0"},

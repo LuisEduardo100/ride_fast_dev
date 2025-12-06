@@ -36,3 +36,5 @@ npm-debug.log
 /assets/node_modules/
 
 .env
+.dev.secret.exs
+/config/*.secret.exs
