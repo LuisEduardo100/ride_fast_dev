@@ -26,4 +26,22 @@ defmodule RideFast.AccountsFixtures do
 
     user
   end
+
+  @doc """
+  Generate a driver.
+  """
+  def driver_fixture(attrs \\ %{}) do
+    {:ok, driver} =
+      attrs
+      |> Enum.into(%{
+        email: "some email",
+        name: "some name",
+        password_hash: "some password_hash",
+        phone: "some phone",
+        status: "some status"
+      })
+      |> RideFast.Accounts.create_driver()
+
+    driver
+  end
 end

@@ -28,10 +28,11 @@ defmodule RideFastWeb.Router do
   end
 
   scope "/api/v1", RideFastWeb do
-    # Você precisará criar esse pipeline depois
     pipe_through [:api, RideFast.Guardian.AuthPipeline]
 
-    # get "/users", UserController, :index
+    # CRUD de Usuários (exceto create, que é o /register)
+    resources "/users", UserController, except: [:new, :edit, :create]
+    resources "/drivers", DriverController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
