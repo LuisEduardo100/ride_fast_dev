@@ -35,3 +35,4 @@ ride_fast-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.env

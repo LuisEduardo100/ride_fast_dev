@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :ride_fast, RideFast.Repo,
   username: "root",
-  password: "@AlfredinA1945",
+  password: System.get_env("DB_PASSWORD") || "",
   hostname: "localhost",
   database: "ride_fast_dev",
   stacktrace: true,
