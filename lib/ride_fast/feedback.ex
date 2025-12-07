@@ -113,4 +113,11 @@ defmodule RideFast.Feedback do
     from(r in Rating, where: r.to_driver_id == ^driver_id)
     |> Repo.all()
   end
+
+  # Listar avaliações que um usuário FEZ
+  def list_ratings_by_user(user_id) do
+    Rating
+    |> where([r], r.from_user_id == ^user_id)
+    |> Repo.all()
+  end
 end

@@ -61,4 +61,10 @@ defmodule RideFastWeb.RatingController do
     ratings = Feedback.list_ratings_by_driver(id_int)
     render(conn, :index, ratings: ratings)
   end
+
+  def index_by_user(conn, %{"user_id" => user_id}) do
+    id_int = String.to_integer(user_id)
+    ratings = Feedback.list_ratings_by_user(id_int)
+    render(conn, :index, ratings: ratings)
+  end
 end
