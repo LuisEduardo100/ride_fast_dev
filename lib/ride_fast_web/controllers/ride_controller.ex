@@ -161,8 +161,8 @@ defmodule RideFastWeb.RideController do
     end
   end
 
-  def history(conn, %{"id" => id}) do
-    ride = Operation.get_ride!(id)
+  def history(conn, %{"ride_id" => ride_id}) do
+    ride = Operation.get_ride!(ride_id)
 
     # 1. Evento Inicial
     events = [
