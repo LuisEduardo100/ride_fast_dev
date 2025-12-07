@@ -23,6 +23,7 @@ defmodule RideFastWeb.RideJSON do
       dest_lat: ride.dest_lat,
       dest_lng: ride.dest_lng,
       price_estimate: ride.price_estimate,
+      cancel_reason: ride.cancel_reason,
       final_price: ride.final_price,
       status: ride.status,
       requested_at: ride.requested_at,

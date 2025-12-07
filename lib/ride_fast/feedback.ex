@@ -101,4 +101,16 @@ defmodule RideFast.Feedback do
   def change_rating(%Rating{} = rating, attrs \\ %{}) do
     Rating.changeset(rating, attrs)
   end
+
+  # Listar avaliações de uma corrida específica
+  def list_ratings_by_ride(ride_id) do
+    from(r in Rating, where: r.ride_id == ^ride_id)
+    |> Repo.all()
+  end
+
+  # Listar avaliações que um motorista RECEBEU
+  def list_ratings_by_driver(driver_id) do
+    from(r in Rating, where: r.to_driver_id == ^driver_id)
+    |> Repo.all()
+  end
 end

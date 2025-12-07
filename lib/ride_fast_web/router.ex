@@ -37,6 +37,8 @@ defmodule RideFastWeb.Router do
 
     # RATINGS
     resources "/ratings", RatingController, except: [:new, :edit]
+    get "/rides/:ride_id/ratings", RatingController, :index_by_ride
+    get "/drivers/:driver_id/ratings", RatingController, :index_by_driver
 
     # RIDES
     resources "/rides", RideController, except: [:new, :edit]
@@ -44,6 +46,7 @@ defmodule RideFastWeb.Router do
     post "/rides/:id/start", RideController, :start
     post "/rides/:id/complete", RideController, :complete
     post "/rides/:id/cancel", RideController, :cancel
+    get "/rides/:id/history", RideController, :history
 
     # ROTA DE PERFIL
     get "/drivers/:driver_id/profile", DriverProfileController, :show

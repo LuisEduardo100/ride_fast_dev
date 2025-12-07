@@ -11,7 +11,7 @@ defmodule RideFastWeb.VehicleController do
     render(conn, :index, vehicles: vehicles)
   end
 
-  def create(conn, %{"vehicle" => vehicle_params}) do
+  def create(conn, %{"vehicle" => vehicle_params} = params) do
     with {:ok, %Vehicle{} = vehicle} <- Fleet.create_vehicle(vehicle_params) do
       conn
       |> put_status(:created)
@@ -25,7 +25,7 @@ defmodule RideFastWeb.VehicleController do
     render(conn, :show, vehicle: vehicle)
   end
 
-  def update(conn, %{"id" => id, "vehicle" => vehicle_params}) do
+  def update(conn, %{"id" => id, "vehicle" => vehicle_params} = params) do
     vehicle = Fleet.get_vehicle!(id)
 
     with {:ok, %Vehicle{} = vehicle} <- Fleet.update_vehicle(vehicle, vehicle_params) do

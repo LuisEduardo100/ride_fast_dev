@@ -12,6 +12,7 @@ defmodule RideFast.Operation.Ride do
     field :status, :string
     field :requested_at, :naive_datetime
     field :started_at, :naive_datetime
+    field :cancel_reason, :string
     field :ended_at, :naive_datetime
     field :user_id, :id
     field :driver_id, :id
@@ -36,7 +37,8 @@ defmodule RideFast.Operation.Ride do
       :status,
       :requested_at,
       :started_at,
-      :ended_at
+      :ended_at,
+      :cancel_reason
     ])
     |> validate_required([:user_id, :origin_lat, :origin_lng, :dest_lat, :dest_lng, :status])
   end

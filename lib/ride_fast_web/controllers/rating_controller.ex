@@ -12,21 +12,16 @@ defmodule RideFastWeb.RatingController do
     render(conn, :index, ratings: ratings)
   end
 
-  def create(conn, %{"rating" => rating_params}) do
-    # 1. Validar se a corrida existe e está FINALIZADA
-    ride_id = rating_params["ride_id"]
+  def create(conn, params) do
+    ride_id = params["ride_id"]
     ride = Operation.get_ride!(ride_id)
 
     if ride.status != "FINALIZADA" do
-      conn
-      |> put_status(:forbidden)
-      |> json(%{error: "Você só pode avaliar corridas FINALIZADAS."})
+      conn |> put_status(:forbidden) |> json(%{error: "Ride not finished"})
     else
-      # Se estiver ok, cria a avaliação
-      with {:ok, %Rating{} = rating} <- Feedback.create_rating(rating_params) do
+      with {:ok, %Rating{} = rating} <- Feedback.create_rating(params) do
         conn
         |> put_status(:created)
-        |> put_resp_header("location", ~p"/api/v1/ratings/#{rating}")
         |> render(:show, rating: rating)
       end
     end
@@ -51,5 +46,19 @@ defmodule RideFastWeb.RatingController do
     with {:ok, %Rating{}} <- Feedback.delete_rating(rating) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def index_by_ride(conn, %{"ride_id" => ride_id}) do
+    id_int = String.to_integer(ride_id)
+
+    ratings = Feedback.list_ratings_by_ride(id_int)
+    render(conn, :index, ratings: ratings)
+  end
+
+  def index_by_driver(conn, %{"driver_id" => driver_id}) do
+    id_int = String.to_integer(driver_id)
+
+    ratings = Feedback.list_ratings_by_driver(id_int)
+    render(conn, :index, ratings: ratings)
   end
 end

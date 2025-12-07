@@ -136,12 +136,18 @@ defmodule RideFast.Operation do
     |> Repo.update()
   end
 
-  def cancel_ride(%Ride{} = ride) do
+  def cancel_ride(%Ride{} = ride, reason) do
     ride
     |> Ride.changeset(%{
       status: "CANCELADA",
-      ended_at: NaiveDateTime.utc_now()
+      ended_at: NaiveDateTime.utc_now(),
+      cancel_reason: reason
     })
     |> Repo.update()
+  end
+
+  def list_rides_by_status(status) do
+    import Ecto.Query
+    from(r in Ride, where: r.status == ^status) |> Repo.all()
   end
 end
