@@ -33,6 +33,14 @@ defmodule RideFastWeb.Router do
     # CRUD de Usuários (exceto create, que é o /register)
     resources "/users", UserController, except: [:new, :edit, :create]
     resources "/drivers", DriverController, except: [:new, :edit]
+    resources "/vehicles", VehicleController, except: [:new, :edit]
+
+    # RIDES
+    resources "/rides", RideController, except: [:new, :edit]
+    post "/rides/:id/accept", RideController, :accept
+    post "/rides/:id/start", RideController, :start
+    post "/rides/:id/complete", RideController, :complete
+    post "/rides/:id/cancel", RideController, :cancel
   end
 
   # Other scopes may use custom stacks.

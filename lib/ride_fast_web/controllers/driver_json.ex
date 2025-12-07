@@ -21,7 +21,6 @@ defmodule RideFastWeb.DriverJSON do
       name: driver.name,
       email: driver.email,
       phone: driver.phone,
-      password_hash: driver.password_hash,
       status: driver.status
     }
   end
