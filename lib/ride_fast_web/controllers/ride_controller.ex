@@ -154,4 +154,18 @@ defmodule RideFastWeb.RideController do
         end
     end
   end
+
+  def cancel(conn, %{"id" => id}) do
+    ride = Operation.get_ride!(id)
+
+    if ride.status == "FINALIZADA" do
+      conn
+      |> put_status(:conflict)
+      |> json(%{error: "Não é possível cancelar uma corrida já finalizada."})
+    else
+      with {:ok, %Ride{} = ride} <- Operation.cancel_ride(ride) do
+        render(conn, :show, ride: ride)
+      end
+    end
+  end
 end

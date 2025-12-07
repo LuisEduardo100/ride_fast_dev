@@ -135,4 +135,13 @@ defmodule RideFast.Operation do
     })
     |> Repo.update()
   end
+
+  def cancel_ride(%Ride{} = ride) do
+    ride
+    |> Ride.changeset(%{
+      status: "CANCELADA",
+      ended_at: NaiveDateTime.utc_now()
+    })
+    |> Repo.update()
+  end
 end

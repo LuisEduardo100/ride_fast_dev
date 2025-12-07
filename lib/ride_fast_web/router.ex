@@ -35,6 +35,9 @@ defmodule RideFastWeb.Router do
     resources "/drivers", DriverController, except: [:new, :edit]
     resources "/vehicles", VehicleController, except: [:new, :edit]
 
+    # RATINGS
+    resources "/ratings", RatingController, except: [:new, :edit]
+
     # RIDES
     resources "/rides", RideController, except: [:new, :edit]
     post "/rides/:id/accept", RideController, :accept
