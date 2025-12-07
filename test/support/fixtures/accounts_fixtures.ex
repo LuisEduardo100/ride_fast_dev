@@ -44,4 +44,20 @@ defmodule RideFast.AccountsFixtures do
 
     driver
   end
+
+  @doc """
+  Generate a driver_profile.
+  """
+  def driver_profile_fixture(attrs \\ %{}) do
+    {:ok, driver_profile} =
+      attrs
+      |> Enum.into(%{
+        background_check_ok: true,
+        license_expiry: ~D[2025-12-06],
+        license_number: "some license_number"
+      })
+      |> RideFast.Accounts.create_driver_profile()
+
+    driver_profile
+  end
 end

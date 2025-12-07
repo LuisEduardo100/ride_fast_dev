@@ -44,6 +44,17 @@ defmodule RideFastWeb.Router do
     post "/rides/:id/start", RideController, :start
     post "/rides/:id/complete", RideController, :complete
     post "/rides/:id/cancel", RideController, :cancel
+
+    # ROTA DE PERFIL
+    get "/drivers/:driver_id/profile", DriverProfileController, :show
+    post "/drivers/:driver_id/profile", DriverProfileController, :create
+    put "/drivers/:driver_id/profile", DriverProfileController, :update
+
+    # IDIOMAS
+    resources "/languages", LanguageController, except: [:new, :edit]
+    get "/drivers/:driver_id/languages", DriverLanguageController, :index
+    post "/drivers/:driver_id/languages/:language_id", DriverLanguageController, :create
+    delete "/drivers/:driver_id/languages/:language_id", DriverLanguageController, :delete
   end
 
   # Other scopes may use custom stacks.
